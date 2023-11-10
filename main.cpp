@@ -1,27 +1,36 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 
 void isPrime(int);
 
 int main(){
+    int userNum;
+    std::cout << "Enter a number to find primes below: " << std::endl;
+    std::cin >> userNum;
 
+    std::vector<int> numbers;
+    for(int i = 2; i <= userNum; i++)
+        numbers.push_back(i);
+
+    for_each(numbers.begin(), numbers.end(), isPrime);
+
+    return 0;
 }
 
-/*
-    * Read in number.
-    * Create vector with ints 2 through number.
-    * Pass vector to for_each() with iterators pointing to start and end of vector.
-    * Each element of vector is passed to isPrime()
-    * 
-    * isPrime(int num):
-    *   bool prime = true
-    *   double sqroot = sqrt(num)
-    *   Check if int is even, if even end function, call next int.
-    *   If odd:
-    *       for(int i = 2; i <= sqroot; i++)
-    *           if(num % i == 0)
-    *               prime = false
-    *   if(prime)
-    *       display num
-*/
+void isPrime(int num){
+    bool prime = true;
+    double sqroot = std::sqrt(num);
+    if(num % 2 == 0 && num != 2)
+        return;
+
+    else
+        for(int i = 2; i <= sqroot; i++){
+            if(num % i == 0)
+                prime = false;
+        }
+    
+    if(prime)
+        std::cout << num << std::endl;
+}
